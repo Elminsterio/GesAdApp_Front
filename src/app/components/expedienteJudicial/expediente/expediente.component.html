@@ -1,0 +1,19 @@
+<app-loading *ngIf="!expediente"></app-loading>
+<div *ngIf="expediente">
+<h1 class="m-3"> Expediente: {{expediente['numero']}} </h1>
+<nav mat-tab-nav-bar dynamicHeight mat-align-tabs="center">
+    <a mat-tab-link routerLink="resumen"> Resumen </a>
+    <a mat-tab-link routerLink="ficha"> Datos Judiciales</a>
+    <a mat-tab-link routerLink="intervinientes"> Intervinientes </a>
+    <a mat-tab-link routerLink="documentos"> Documentos </a>
+    <a mat-tab-link routerLink="historial"> Historial </a>
+    <a mat-tab-link routerLink="vencimientos"> Vencimientos </a>
+</nav>
+
+<div class="container">
+
+    <router-outlet></router-outlet>
+
+</div>
+
+</div>

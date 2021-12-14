@@ -1,0 +1,51 @@
+<app-loading *ngIf="!expedientes"></app-loading>
+
+<div *ngIf="expedientes">
+    <div class="form-row m-5">
+
+        <input list="litigantes" type="text" placeholder="Introduzca nombre y apellidos/documento/número" name="litigante" id="litigante" class="form-control col-md-10" #v>
+        <button class="btn btn-primary ml-2"><i class="fas fa-search"></i></button>
+
+    </div>
+    
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                
+                <th> Número de Expediente </th>
+
+                <th> Estado del Expediente </th>
+
+                <th> Clientes asignados </th>
+
+                <th> Fecha de Creación </th>
+
+                <th>  </th>
+
+                </tr>                
+            </thead>
+            <tbody>
+                <tr *ngFor="let expediente of expedientesBuscados">
+
+                    <td>{{expediente.numero}}</td>
+
+                    <td>{{expediente.estado}}</td>
+
+                    <td>
+                        <p *ngFor="let cliente of expediente.clientes">
+                        {{cliente.nombre}} {{cliente.apellidos}}
+                        </p>
+                    </td>
+
+                    <td>{{expediente.fechaCreacion | date:"dd/MM/yy" }}</td>
+
+                    <td>
+                        <i class="fas fa-folder" style="cursor: pointer;" (click)="aExpediente(expediente._id)"></i>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

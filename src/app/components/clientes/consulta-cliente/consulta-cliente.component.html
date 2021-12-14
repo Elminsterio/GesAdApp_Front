@@ -1,0 +1,44 @@
+<app-loading *ngIf="!clientes"></app-loading>
+
+<div *ngIf="clientes">
+    <div class="form-row m-5">
+
+        <input list="litigantes" type="text" placeholder="Introduzca nombre y apellidos/documento/número" name="litigante" id="litigante" class="form-control col-md-10" (keyup.enter)="buscar(v.value, clientes, clientesBuscados)" #v>
+        <button class="btn btn-primary ml-2" (click)="buscar(v.value, clientes, clientesBuscados)"><i class="fas fa-search"></i></button>
+
+    </div>
+    
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                
+                <th> Nombre y Apellidos </th>
+
+                <th> Documento de Identificación </th>
+
+                <th> Número de Cliente </th>
+
+                <th>  </th>
+
+                </tr>                
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientesBuscados" >
+                <td> 
+                    {{cliente.nombre}} {{cliente.apellidos}}
+                </td>
+                <td> 
+                    {{cliente.DocIdentificacion}}
+                </td>
+                <td> 
+                    {{cliente.numero}}
+                </td>
+                <td> 
+                    <i style="cursor: pointer;" class="fas fa-id-card" (click)="aCliente(cliente._id)"></i>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<app-loading *ngIf="!cliente" ></app-loading>
+<div *ngIf="cliente" >
+  <h2 class="my-4"><i class="fas fa-address-card"></i> Cliente </h2>
+
+  <form [formGroup]="forma" class="m-3" >
+    
+    <h3> Datos Personales: </h3>
+    <hr>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="nombre"> Nombre </label>
+          <input type="text" 
+                class="form-control" 
+                id="nombre"
+                name="nombre"
+                formControlName="nombre"
+                >
+        </div>
+        <div class="form-group col-md-4">
+          <label for="apellidos"> Apellidos </label>
+          <input type="text" 
+                class="form-control" 
+                id="apellidos"
+                name="apellidos"
+                formControlName="apellidos">
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group col-md-2">
+              <label for="DocIdentificacion"> DNI/NIE/NIF </label>
+              <input type="text" 
+              class="form-control" 
+              id="DocIdentificacion" 
+              name="DocIdentificacion"
+              formControlName="DocIdentificacion"
+              >
+          </div>
+      <div class="form-group col-md-2">
+          <label for="nacionalidad"> Nacionalidad </label>
+          <input type="text" 
+              class="form-control" 
+              id="nacionalidad" 
+              name="nacionalidad"
+              formControlName="nacionalidad">
+          </div>
+      </div>
+    <h3> Datos de contacto: </h3>
+    <hr>
+    <div class="form-row">
+      <div class="form-group col-md-8">
+          <label for="domicilio"> Domicilio </label>
+          <input type="text" 
+          class="form-control" 
+          id="domicilio" 
+          name="domicilio"
+          formControlName="domicilio"
+          >
+      </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+        <label for="telefono"> Teléfono </label>
+        <input type="text" 
+        class="form-control" 
+        id="telefono" 
+        name="telefono"
+        formControlName="telefono"
+        >
+    </div>
+    <div class="form-group col-md-5">
+      <label for="email"> e-mail </label>
+      <input type="text" 
+          class="form-control" 
+          id="email" 
+          name="email"
+          formControlName="email">
+      </div>
+  </div>
+    <button [class.disabled]="this.forma.invalid" type="submit" class="btn btn-primary" (click)="Submit()">Guardar</button>
+  </form>
+  <h3> Expedientes asignados: </h3>
+  <hr>
+  <div>
+  <table class="table container" *ngIf="cliente['expedientes'].length">
+    <thead class="thead-dark">
+        <tr>
+            <th> ID </th>
+
+            <th> Estado </th>
+
+            <th> Orden Jurisdiccional </th>
+
+            <th> Juzgado </th>
+
+            <th> Partido </th>
+
+            <th>Abrir</th>
+        </tr>                
+    </thead>
+    <tbody>
+        <tr *ngFor="let expediente of cliente['expedientes']">
+
+            <td> 
+              {{expediente.numero}}
+            </td>
+            <td> 
+              {{expediente.estado}}
+            </td>
+            <td> 
+                
+            </td>
+            <td> 
+                {{expediente.juzgado}}  {{expediente.numeroJuzgado}}
+            </td>
+            <td>
+              {{expediente.partido}}
+            </td>
+            <td>
+                <a [routerLink]="['/expediente', expediente._id, 'resumen']"><i class="fas fa-folder"></i></a>
+            </td>
+        </tr>     
+    </tbody>
+  </table>
+  <div *ngIf="!cliente['expedientes'].length" class="my-5">
+    <h4 class="text-center"> No hay expedientes asignados </h4>
+  </div>
+</div>
+

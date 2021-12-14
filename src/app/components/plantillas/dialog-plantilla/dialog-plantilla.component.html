@@ -1,0 +1,44 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label> Título de la plantilla </mat-label>
+      <input matInput [(ngModel)]="data.titulo" [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label> Realiza una descripción de la plantilla </mat-label>
+      <textarea matInput [(ngModel)]="data.descripcion" [ngModelOptions]="{standalone: true}" rows="6"></textarea>
+    </mat-form-field>
+  </form>
+  <div class="row w-100 align-items-center">
+    <div class="col text-center">
+        <button class="btn btn-primary mx-auto" (click)="fileInput.click()"> Cargar Plantilla </button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    </div>
+  </div>
+  <table class="table mt-3">
+    <thead>
+        <tr>
+          <th scope="col"> Nombre </th>
+          <th scope="col"> Tamaño </th>
+          <th scope="col"> Extension </th>
+        </tr>
+      </thead>
+    
+      
+    <tbody>
+       <tr *ngIf="nombre">
+          <td>{{nombre}}</td>
+          <td>{{data.plantillaFile.size /1024/1024 | number: '.2-2'}} MB</td>
+          <td>{{extension}}</td>
+         <!-- <td><button (click)="verArchivo(documento.archivo)"><i class="fas fa-folder"></i></button></td>-->
+        </tr> 
+      </tbody>
+  </table> 
+
+
+    <div class="row w-100 align-items-center">
+      <div class="col text-center">
+    <button class="btn btn-primary mx-3 mt-5" [mat-dialog-close]="data"> Enviar </button>
+    <button class="btn btn-danger mx-3 mt-5" (click)="onNoClick()"> Cerrar </button>
+      </div>
+    </div>

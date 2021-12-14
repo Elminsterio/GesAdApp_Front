@@ -1,0 +1,129 @@
+<div>
+  <h2 class="my-4"><i class="fas fa-address-card"></i> Nuevo cliente </h2>
+  <hr>
+
+  <div [ngSwitch]="avance">
+    <form class="m-3" [formGroup]="forma">
+
+
+      <div *ngSwitchDefault>
+
+        <h3> Introduce nombre y apellidos: </h3>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="nombre"> Nombre </label>
+            <input type="text" 
+                  class="form-control" 
+                  id="nombre"
+                  name="nombre"
+                  formControlName="nombre"
+                  [class.is-invalid]="nombreNoValido"
+                  [class.is-valid]="forma.controls.nombre.valid"
+                  >
+                  <small class="text-danger" *ngIf="nombreNoValido">
+                    El nombre es necesario
+                  </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="apellidos"> Apellidos </label>
+            <input type="text" 
+                  class="form-control is-valid" 
+                  id="apellidos"
+                  name="apellidos"
+                  formControlName="apellidos"
+                  [class.is-invalid]="apellidosNoValido"
+                  [class.is-valid]="forma.controls.apellidos.valid">
+                  <small class="text-danger" *ngIf="apellidosNoValido">
+                    Los apellidos son necesarios
+                  </small>
+          </div>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="forma.controls.apellidos.invalid || forma.controls.nombre.invalid" (click)="avanzarPlantilla(true)" > Aceptar </button>
+        <button class="btn btn-danger ml-2" type="submit" *ngIf="avance !== ''" (click)="avanzarPlantilla(false)" ><i class="fas fa-undo"></i></button>
+      </div>
+
+
+      <div *ngSwitchCase="'identificacion'">
+
+        <h3> Introduce los datos de Identificación: </h3>
+
+        <div class="form-row">
+          <div class="form-group col-md-2">
+              <label for="DocIdentificacion"> DNI/NIE/NIF </label>
+              <input type="text" 
+              class="form-control" 
+              id="DocIdentificacion" 
+              name="DocIdentificacion"
+              formControlName="DocIdentificacion"
+              [class.is-invalid]="DocIdentificacionNoValido"
+              [class.is-valid]="forma.controls.DocIdentificacion.valid">
+              <small class="text-danger" *ngIf="DocIdentificacionNoValido">
+                El documento introducido ya existe o es inválido
+              </small>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="nacionalidad"> Nacionalidad </label>
+            <select type="text" 
+                class="form-control" 
+                id="nacionalidad" 
+                name="nacionalidad"
+                formControlName="nacionalidad"><option></option></select>
+          </div>
+        </div> 
+
+        <button class="btn btn-success" type="submit" [disabled]="forma.controls.DocIdentificacion.invalid && validarCampo('DocIdentificacion')" (click)="avanzarPlantilla(true)"> Aceptar </button>
+        <button class="btn btn-danger ml-2" type="submit" [disabled]="avance === '' || avance == '0'" (click)="avanzarPlantilla(false)" ><i class="fas fa-undo"></i></button>
+
+      </div>
+
+
+      <div *ngSwitchCase="'contacto'">
+
+        <h3> Introduce los datos de contacto: </h3>
+        
+        <div class="form-row">
+          <div class="form-group col-md-8">
+              <label for="domicilio"> Domicilio </label>
+              <input type="text" 
+              class="form-control" 
+              id="domicilio" 
+              name="domicilio"
+              formControlName="domicilio"
+              [class.is-invalid]="domiciliolNoValido"
+              [class.is-valid]="forma.controls.domicilio.valid"
+              >
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="telefono"> Teléfono </label>
+            <input type="text" 
+            class="form-control" 
+            id="telefono" 
+            name="telefono"
+            formControlName="telefono"
+            >
+        </div>
+        <div class="form-group col-md-5">
+          <label for="email"> e-mail </label>
+          <input type="email" 
+              class="form-control" 
+              id="email" 
+              name="email"
+              formControlName="email"
+              [class.is-invalid]="emailNoValido"
+              [class.is-valid]="forma.controls.email.valid">
+              <small class="text-danger" *ngIf="emailNoValido">
+               El e-mail es incorrecto o ya consta
+              </small>
+              
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="forma.invalid && validarCampo('email')" (click)="submit()"> Finalizar </button>
+        <button class="btn btn-danger ml-2" type="submit" (click)="avanzarPlantilla(false)" ><i class="fas fa-undo"></i></button>
+
+      </div>
+    </form>
+  </div>
+</div>

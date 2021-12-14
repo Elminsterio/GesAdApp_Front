@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.subidaDatos {
+    cursor: pointer;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.etiquetaDatos {
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    display: inline-block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 8px 13px !important;
+    border-radius: 8px;
+    border-style: solid;
+    width: fit-content;
+    text-align: center;
+}

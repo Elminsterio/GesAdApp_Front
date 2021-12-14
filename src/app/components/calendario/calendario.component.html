@@ -1,0 +1,66 @@
+<div class="mt-4">
+    <div class="dark" style="margin: 10px auto;
+    width: 40%;
+    display: flex; align-items: center;
+    justify-content: center;">
+        <div>
+        <select class="custom-select" #v (change)="cambiarDate(v.value, v2.value)">
+            <option name="mesActual" [selected]="mes === _dj.meses[mesSelec - 1]" *ngFor="let mes of _dj.meses" [ngValue]="mes"> {{mes}} </option> 
+        </select>
+        </div>
+        <div> 
+        <select class="custom-select" #v2 (change)="cambiarDate(v.value, v2.value)">
+            <option name="anioActual" [selected]="anioSelec == anio" *ngFor="let anio of _dj.anios" [ngValue]="anio"> {{anio}} </option>
+        </select>
+        </div> 
+    </div>
+    <table class="table table-dark">
+        <thead>
+        
+            <tr>
+                <th> Lun </th>
+                <th> Mar </th>
+                <th> Mie </th>
+                <th> Jue </th>
+                <th> Vie </th>
+                <th> Sab </th>
+                <th> Dom </th>     
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let semana of _dj.semanaDias; let i2 = index">
+                <td *ngFor="let dia of _dj.semanaDias[i2]"><a href="#">{{dia}}</a></td>
+            </tr>        
+        </tbody>
+    </table>
+
+    <div class="container" *ngIf="citas.length">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th> Fecha </th>
+                    <th> Tipo </th>
+                    <th> Expediente </th>
+                    <th> Abogado Asignado </th>
+                </tr>                
+            </thead>
+            <tbody>
+                <tr>
+                    <td> 
+                        
+                    </td>
+                    <td> 
+                        
+                    </td>
+                    <td> 
+                        
+                    </td>
+                    <td> 
+                        
+                    </td>
+                </tr>     
+            </tbody>
+        </table>
+    </div>
+</div>

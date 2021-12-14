@@ -1,0 +1,80 @@
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre archivo</th>
+
+                    <th>Tamaño</th>
+
+                    <th>Comentario</th>
+
+                    <th>Tipo</th>
+
+                    <th>Progreso</th>
+
+                    <th></th>
+                    <th></th>
+                </tr>                
+            </thead>
+            <tbody>
+                <tr *ngFor="let archivo of archivos; let i = index">
+
+                    <td [ngClass]="{'text-green': archivo.progreso >= 100}"> 
+                        {{archivo.nombreArchivo}} 
+                    </td>
+                    <td> 
+                        {{archivo.archivo.size /1024/1024 | number: '.2-2'}} MB 
+                    </td>
+                    <td> 
+                        <input type="text" placeholder="Introduce la descripción" name="descripcion" [(ngModel)]="descripcion[i ]" > 
+                    </td>
+                    <td> 
+                        <select name="tipo" [(ngModel)]="tipo[i ]"> <option *ngFor="let opcion of _dj.tiposDeDocumento; let i2 = index" > {{_dj.tiposDeDocumento[i2]}} </option> </select>
+                        <div class="row">
+                            <div class="col my-2">
+                                <label for="costas"> Con costas: </label>
+                                <input type="checkbox" name="costas" id="costas" class="ml-2" [(ngModel)]="costas[i ]">
+                            </div>
+                            <div class="col my-2">
+                                <label for="costas"> Con vencimiento: </label>
+                                <input type="checkbox" name="vencimiento" id="vencimiento" class="ml-2" [(ngModel)]="vencimiento[i ]">
+                            </div>
+                        </div>
+                        <div class="row align-self-center" *ngIf="vencimiento[i] && (plazo[i] != 'Días' || plazo[i ] != 'Meses' || plazo[i ] != 'Años')">
+                            <div class="col-md-auto">
+                                <label for="dias" class="small"> En días: </label>
+                                <input type="radio" [name]="'plazo' + i" id="dias" class="mx-2" [(ngModel)]="plazo[i ]" value="Días">
+                            </div>
+                            <div class="col-md-auto">
+                                <label for="meses" class="small"> En meses: </label>
+                                <input type="radio" [name]="'plazo' + i" id="meses" class="mx-2" [(ngModel)]="plazo[i ]" value="Meses">
+                            </div>
+                            <div class="col-md-auto">
+                                <label for="anios" class="small"> En años: </label>
+                                <input type="radio" [name]="'plazo' + i" id="anios" class="mx-2" [(ngModel)]="plazo[i]" value="Años">
+                            </div>
+                            <div class="row align-self-center" *ngIf="vencimiento[i ] && (plazo[i ] == 'Días' || plazo[i ] == 'Meses' || plazo[i ] == 'Años')" class="row">
+                                <div class="col">
+                                    <label for="conteo" class="small"> {{plazo[i ]}}: </label>
+                                    <input name="conteo" type="number" class="form-control-sm" [(ngModel)]="conteo[i ]">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td> 
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <button (click)="cargarArchivo(archivo, tipo[i - 1], descripcion[i - 1],  i)" class="btn btn-success">
+                            Cargar Archivo
+                        </button>
+                    </td>
+                    <td>
+                        <button (click)="limpiarArchivos(i)" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </td>
+                </tr>     
+            </tbody>
+        </table>
